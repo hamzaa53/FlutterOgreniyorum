@@ -10,16 +10,16 @@ class ful extends StatefulWidget {
   State<ful> createState() => _fulState();
 }
 
-class _fulState extends State<ful> {
-  int sayac = 0;
+int sayac = 0;
 
+class _fulState extends State<ful> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 13, 46, 72),
-        body: stateYapisi(context, sayac),
+        body: stateYapisi(context),
         bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
             child: Container(height: 50.0)),
@@ -40,21 +40,54 @@ class _fulState extends State<ful> {
   }
 }
 
-Scaffold stateYapisi(BuildContext context, int sayac) {
+Scaffold stateYapisi(BuildContext context) {
   return Scaffold(
     body: Container(
-      color: Color.fromARGB(255, 13, 46, 72),
-      alignment: Alignment.center,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            "Butona tıklanma sayısı",
-            style: TextStyle(color: Colors.white, fontSize: 20),
-          ),
-          Text(sayac.toString(),
-              style: TextStyle(color: Colors.white, fontSize: 53)),
-        ],
+        padding: EdgeInsets.only(top: 10),
+        color: Color.fromARGB(255, 13, 46, 72),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("-", style: TextStyle(fontSize: 30)),
+                  style: butonStil(),
+                ),
+                OutlinedButton(
+                  onPressed: () {},
+                  child: Text("+", style: TextStyle(fontSize: 30)),
+                  style: butonStil(),
+                ),
+              ],
+            ),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Butona tıklanma sayısı",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  Text(sayac.toString(),
+                      style: TextStyle(color: Colors.white, fontSize: 53)),
+                ],
+              ),
+            ),
+          ],
+        )),
+  );
+}
+
+ButtonStyle butonStil() {
+  return OutlinedButton.styleFrom(
+    side: BorderSide(color: Colors.blue.shade200),
+    minimumSize: Size(75, 50),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.all(
+        Radius.circular(20),
       ),
     ),
   );
