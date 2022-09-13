@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: containerYapisi(),
+        body: rowColumnYapisi(),
         backgroundColor: const Color.fromARGB(221, 44, 44, 44),
         bottomNavigationBar: BottomAppBar(
             shape: const CircularNotchedRectangle(),
@@ -25,7 +25,57 @@ class MyApp extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           title: const Text("Ana Başlık"),
-          actions: const [Icon(Icons.abc), Text("abc")],
+          actions: const [Icon(Icons.abc)],
+        ),
+      ),
+    );
+  }
+
+  Container rowColumnYapisi() {
+    return Container(
+      color: Color.fromARGB(255, 0, 38, 44),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              kutu("D", const Color.fromARGB(255, 255, 0, 255)),
+              kutu("A", const Color.fromARGB(255, 255, 75, 255)),
+              kutu("R", const Color.fromARGB(255, 255, 150, 255)),
+              kutu("T", const Color.fromARGB(255, 255, 200, 255)),
+            ],
+          ),
+          Row(children: [Container(height: 40)]),
+          Flexible(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                kutu("E", const Color.fromARGB(255, 255, 25, 255)),
+                kutu("R", const Color.fromARGB(255, 255, 50, 255)),
+                kutu("S", const Color.fromARGB(255, 255, 75, 255)),
+                kutu("L", const Color.fromARGB(255, 255, 100, 255)),
+                kutu("E", const Color.fromARGB(255, 255, 125, 255)),
+                kutu("R", const Color.fromARGB(255, 255, 150, 255)),
+                kutu("İ", const Color.fromARGB(255, 255, 175, 255)),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Container kutu(String letter, Color renk) {
+    return Container(
+      width: 50,
+      height: 75,
+      color: renk,
+      child: Center(
+        child: Text(
+          letter,
+          textAlign: TextAlign.center,
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
       ),
     );
