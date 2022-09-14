@@ -6,11 +6,14 @@ void main() {
 }
 
 class ful extends StatefulWidget {
+  const ful({Key? key}) : super(key: key);
+
   @override
   State<ful> createState() => _fulState();
 }
 
 int sayac = 0;
+String anaBaslik = "Ana Başlık";
 
 class _fulState extends State<ful> {
   @override
@@ -32,7 +35,7 @@ class _fulState extends State<ful> {
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
         appBar: AppBar(
           centerTitle: true,
-          title: const Text("Ana Başlık"),
+          title: Text(anaBaslik),
           actions: const [Icon(Icons.abc)],
         ),
       ),
@@ -42,77 +45,87 @@ class _fulState extends State<ful> {
 
 Scaffold stateYapisi(BuildContext context) {
   return Scaffold(
-    body: Container(
-        padding: EdgeInsets.only(top: 10),
-        color: Color.fromARGB(255, 13, 46, 72),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text("-", style: TextStyle(fontSize: 30)),
-                  style: butonStil(),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text("+", style: TextStyle(fontSize: 30)),
-                  style: butonStil(),
-                ),
-              ],
-            ),
+      body: Container(
+          padding: EdgeInsets.only(top: 10),
+          color: Color.fromARGB(255, 13, 46, 72),
+          child: Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              OutlinedButton(
+                onPressed: () {},
+                child: Text("-", style: TextStyle(fontSize: 30)),
+                style: butonStil(),
+              ),
+              OutlinedButton(
+                onPressed: () {},
+                child: Text("+", style: TextStyle(fontSize: 30)),
+                style: butonStil(),
+              )
+            ]),
+            Column(children: [
+              PopupMenuButton<String>(
+                  color: Colors.grey,
+                  onSelected: (value) {
+                    fonksiyon(value);
+                  },
+                  elevation: 10,
+                  itemBuilder: (context) => [
+                        PopupMenuItem(
+                          child: Text("Rize"),
+                          value: "Rize",
+                        ),
+                        PopupMenuItem(
+                          child: Text("İstanbul"),
+                          value: "İstanbul",
+                        ),
+                        PopupMenuItem(
+                          child: Text("Ankara"),
+                          value: "Ankara",
+                        )
+                      ])
+            ]),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                   Text(
                     "Butona tıklanma sayısı",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   Text(sayac.toString(),
                       style: TextStyle(color: Colors.white, fontSize: 53)),
-                ],
-              ),
-            ),
-          ],
-        )),
-  );
+                ]))
+          ])));
+}
+
+void fonksiyon(String deger) {
+  anaBaslik = deger;
 }
 
 ButtonStyle butonStil() {
   return OutlinedButton.styleFrom(
-    side: BorderSide(color: Colors.blue.shade200),
-    minimumSize: Size(75, 50),
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.all(
+      side: BorderSide(color: Colors.blue.shade200),
+      minimumSize: Size(75, 50),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
         Radius.circular(20),
-      ),
-    ),
-  );
+      )));
 }
 
 Container rowColumnYapisi() {
   return Container(
-    color: Color.fromARGB(255, 0, 38, 44),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            kutu("D", const Color.fromARGB(255, 255, 0, 255)),
-            kutu("A", const Color.fromARGB(255, 255, 75, 255)),
-            kutu("R", const Color.fromARGB(255, 255, 150, 255)),
-            kutu("T", const Color.fromARGB(255, 255, 200, 255)),
-          ],
-        ),
+      color: Color.fromARGB(255, 0, 38, 44),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          kutu("D", const Color.fromARGB(255, 255, 0, 255)),
+          kutu("A", const Color.fromARGB(255, 255, 75, 255)),
+          kutu("R", const Color.fromARGB(255, 255, 150, 255)),
+          kutu("T", const Color.fromARGB(255, 255, 200, 255)),
+        ]),
         Row(children: [Container(height: 40)]),
         Flexible(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
               kutu("E", const Color.fromARGB(255, 255, 25, 255)),
               kutu("R", const Color.fromARGB(255, 255, 50, 255)),
               kutu("S", const Color.fromARGB(255, 255, 75, 255)),
@@ -120,27 +133,21 @@ Container rowColumnYapisi() {
               kutu("E", const Color.fromARGB(255, 255, 125, 255)),
               kutu("R", const Color.fromARGB(255, 255, 150, 255)),
               kutu("İ", const Color.fromARGB(255, 255, 175, 255)),
-            ],
-          ),
-        ),
-      ],
-    ),
-  );
+            ]))
+      ]));
 }
 
 Container kutu(String letter, Color renk) {
   return Container(
-    width: 50,
-    height: 75,
-    color: renk,
-    child: Center(
-      child: Text(
+      width: 50,
+      height: 75,
+      color: renk,
+      child: Center(
+          child: Text(
         letter,
         textAlign: TextAlign.center,
         style: const TextStyle(fontWeight: FontWeight.bold),
-      ),
-    ),
-  );
+      )));
 }
 
 Center containerYapisi() {
